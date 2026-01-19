@@ -1,55 +1,55 @@
-Branch Workflow (Feature Branch -> Merge -> Cleanup) | 分支工作流（功能分支 -> 合并 -> 清理）
+Branch Workflow (Feature Branch -> Merge -> Cleanup) | 分支工作流（功能开发 -> 合并 -> 清理）
 ================================================================================
 
 Title | 标题
 -----
-Feature Branch Development and Merge Back to Main | 功能分支开发并合并回主分支
+Feature Branch Development and Merge Back to Main | 功能分支开发及其向主分支的合并
 
-When to use | 何时使用
+When to use | 适用场景
 -----------
-- You want to add a feature without risking the stability of `main`. | 你想添加新功能而不影响 `main` 分支的稳定性。
-- You need a clean, reviewable history for a specific change. | 你需要为特定更改保留清晰、可评审的历史记录。
-- You want the option to discard a feature without affecting the main branch. | 你希望可以选择放弃某个功能而不影响主分支。
+- You want to add a feature without risking the stability of `main`. | 在不影响 `main` 分支稳定性的前提下开发新功能。
+- You need a clean, reviewable history for a specific change. | 为特定的变更留存清晰、可评审的历史记录。
+- You want the option to discard a feature without affecting the main branch. | 可选地舍弃某项功能而不对主分支产生任何影响。
 
-Key commands and meanings | 关键命令及其含义
+Key commands and meanings | 核心命令与解析
 -------------------------
-1) Start clean from main | 从 main 分支开始，保持代码最新
+1) Start clean from main | 从最新的主分支开始
 ```bash
 git switch main
 git pull
 ```
-- `git switch main`: move to the main branch. | 切换到主分支。
-- `git pull`: fetch and merge the latest changes from GitHub. | 从 GitHub 获取并合并最新更改。
+- `git switch main`: move to the main branch. | 切换至 `main` 主分支。
+- `git pull`: fetch and merge the latest changes from GitHub. | 从 GitHub 拉取并同步最新代码。
 
 2) Create a feature branch | 创建功能分支
 ```bash
 git switch -c feat/workflow-doc
 ```
-- `git switch -c`: create and switch to a new branch in one step. | 创建并一步切换到新分支。
+- `git switch -c`: create and switch to a new branch in one step. | 创建并同步切换到新分支（一步到位）。
 
 3) Stage and commit changes | 暂存并提交代码
 ```bash
 git add <files>
 git commit -m "docs: add git workflow guide"
 ```
-- `git add`: stage files for commit. | 将文件添加到暂存区。
-- `git commit`: create a snapshot (version) with a message. | 创建一个带有消息的快照（版本）。
+- `git add`: stage files for commit. | 将文件加入暂存区。
+- `git commit`: create a snapshot (version) with a message. | 为当前变更创建快照（提交记录）。
 
-4) Push the branch to GitHub | 将分支推送至 GitHub
+4) Push the branch to GitHub | 推送分支至远程仓库
 ```bash
 git push -u origin feat/workflow-doc
 ```
-- `git push`: send local commits to GitHub. | 将本地提交发送到 GitHub。
-- `-u`: set upstream tracking so future `git push` is simpler. | 设置上游追踪，以便后续的 `git push` 执行更简单。
+- `git push`: send local commits to GitHub. | 将本地提交推送至 GitHub。
+- `-u`: set upstream tracking so future `git push` is simpler. | 建立上游追踪，简化后续推送流程。
 
-5) Merge the feature branch back to main | 将功能分支合并回主分支
+5) Merge the feature branch back to main | 将功能合并回主分支
 ```bash
 git switch main
 git pull
 git merge --no-ff feat/workflow-doc
 git push
 ```
-- `git merge --no-ff`: force a merge commit even if a fast-forward is possible, so the feature's history is explicit. | 即使可以进行快进合并，也强制创建一个合并提交，以使功能的历史记录清晰可见。
+- `git merge --no-ff`: force a merge commit even if a fast-forward is possible, so the feature's history is explicit. | 强制创建合并提交（即使可快进），以保证功能演进历史的完整性。
 
 6) Clean up the feature branch | 清理功能分支
 ```bash
@@ -57,10 +57,11 @@ git branch -d feat/workflow-doc
 git push origin --delete feat/workflow-doc
 ```
 - `git branch -d`: delete the local feature branch. | 删除本地功能分支。
-- `git push origin --delete`: delete the remote feature branch. | 删除远程功能分支。
+- `git push origin --delete`: delete the remote feature branch. | 删除远程仓库的分支记录。
 
-Notes | 注意事项
+Notes | 贴士
 -----
-- Keep `main` stable; do all development in branches. | 保持 `main` 分支稳定；所有开发均在分支中进行。
-- If you are collaborating, create a PR instead of merging directly on `main`. | 如果你是与他人协作，请创建 PR（拉取请求）而不是直接合并到 `main`。
+- Keep `main` stable; do all development in branches. | 始终保持 `main` 稳定；所有开发均应在独立分支中完成。
+- If you are collaborating, create a PR instead of merging directly on `main`. | 团队协作时，应通过 Pull Request (PR) 流程进行合并，而非直接操作 `main`。
+
 
