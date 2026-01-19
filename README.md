@@ -1,20 +1,49 @@
 # Git Learning Workspace | Git 学习工作坊
 
-A streamlined resource for mastering Git & GitHub workflows with safety and precision.
-一套旨在帮助开发者安全、精准地掌握 Git 与 GitHub 工作流的精简指南。
+一个用于练习 Git 与 GitHub 的轻量工作区，包含最小但实用的流程文档与操作指南。
 
-## Quick Links | 快速导航
+## 目录导航
 
-- **[Branch Workflow | 分支工作流](file:///Users/xuanhe/Documents/claudeProject/git-learning/BRANCH_WORKFLOW.md)**: Feature branch development, merging, and cleanup. | 功能分支开发、合并与清理。
-- **[Main Workflow | 核心工作流](file:///Users/xuanhe/Documents/claudeProject/git-learning/GIT_WORKFLOW.md)**: Daily sync, undoing changes, and conflict resolution. | 日常同步、撤销变更与冲突解决。
+- [核心工作流速记](GIT_WORKFLOW.md)
+- [分支开发流程](BRANCH_WORKFLOW.md)
+- [User Guide（中文速查）](Guide/UserGuide.md)
 
-## Core Principles | 核心原则
+## 适用场景
 
-1. **Safety First | 安全第一**: Never develop directly on `main`. | 严禁在 `main` 分支直接开发。
-2. **Clear History | 记录清晰**: Use branches for reviewable, atomic changes. | 使用分支确保变更原子化且可评审。
-3. **Continuous Sync | 持续同步**: Pull frequently to avoid large-scale conflicts. | 保持高频拉取，规避大规模冲突。
+- 个人项目需要稳定的 `main` 分支
+- 每个功能用分支隔离，避免改乱主线
+- 希望有一份简洁可复用的 Git/GitHub 参考
 
----
+## 快速上手（最短路径）
 
-*This project is optimized for developers seeking a condensed, high-accuracy Git reference.*
-*本项目专为寻求高精度、精简型 Git 参考指南的开发者量身打造。*
+1) 从 `main` 拉最新
+```bash
+git switch main
+git pull
+```
+
+2) 新功能开分支
+```bash
+git switch -c feat/your-feature
+```
+
+3) 提交并推送
+```bash
+git add <files>
+git commit -m "feat: your message"
+git push -u origin feat/your-feature
+```
+
+4) 合并回 `main`
+```bash
+git switch main
+git pull
+git merge --no-ff feat/your-feature
+git push
+```
+
+## 约定（建议）
+
+- 不直接在 `main` 上做开发
+- 每次改动尽量小步提交
+- 合并冲突时先 `git status` 再处理
